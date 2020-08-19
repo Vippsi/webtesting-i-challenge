@@ -1,6 +1,7 @@
 const enhancer = require("./enhancer.js");
 
 
+
 const item = {
   name: "Shovel",
   durability: 0,
@@ -97,4 +98,36 @@ describe("Enhancement Fail Function", () => {
     })
 
     
+})
+
+describe("GET Function", () => {
+    it("Validates that if an item's enhancement lvl is 0 then the name isn't modified", () => {
+        const testItem = {
+            name: "Shovel",
+        durability: 20,
+        enhancement: 0,
+        }
+
+        const expectedItem = {
+            name: "Shovel",
+        durability: 10,
+        enhancement: 0,
+        }
+        expect(enhancer.get(testItem).name).toEqual(expectedItem.name)
+    })
+
+    it("Validates that if an item's enhancement lvl is greater than 0, the items name will be changed to include the enhancement lvl", () => {
+        const testItem = {
+            name: "Shovel",
+        durability: 20,
+        enhancement: 10,
+        }
+
+        const expectedItem = {
+            name: "[+10] Shovel",
+        durability: 20,
+        enhancement: 10,
+        }
+        expect(enhancer.get(testItem).name).toEqual(expectedItem.name)
+    })
 })
